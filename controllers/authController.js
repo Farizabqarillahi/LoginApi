@@ -35,17 +35,18 @@ module.exports = {
             const result = await authSchema.validateAsync(req.body)
             const user = await User.findOne({email: result.email})
             const isMatch = await user.isValidPassword(result.password)
-            const isRole = await user.isValidRole(result.isAdmin)
+            // const isRole = await user.isValidRole(result.isAdmin)
             
             if(!user) throw createError.NotFound("User not registered")
             if(!isMatch) throw createError.Unauthorized("Username/Password is Invalid")
-            if(!isRole) throw createError.InternalServerError()
+            // if(!isRole) throw createError.InternalServerError()
     
             const accessToken = await signAccessToken(user.id)
             const refreshToken = await signRefreshToken(user.id)
-            const adminStatus = result.isAdmin
+            // const adminStatus = result.isAdmin
 
-            res.send({accessToken, refreshToken, adminStatus})
+            res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, accessToken, refreshToken });
+
         }catch(error){
             if(error.isJoi === true){
                 return next(createError.BadRequest('Invalid Username/Password'))

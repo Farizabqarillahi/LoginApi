@@ -11,7 +11,7 @@ const authSchema = Joi.object({
     repeat_password: Joi.string().min(8)
     .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),                        //untuk konfirmasi password
 
-    isAdmin: Joi.boolean()
+    // isAdmin: Joi.boolean(true)
 })
 
 module.exports = {authSchema}
