@@ -24,6 +24,9 @@ process.on('SIGINT', async() => {                   //process untuk disconnected
     //await untuk menunggu
     process.exit(0)
 })  
+
+let cors = require("cors");
+app.use(cors());
 //masih ga bisa
 //mungkin ga bisa krn emg dri sanany(?)
 //ternyata error karena vsc sendiri

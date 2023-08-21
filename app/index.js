@@ -16,6 +16,8 @@ require('../helpers/initMongoDB')
 const authRoute = require('../routes/authRoute')
 const { verifyAccessToken } = require('../helpers/jwtHelper')
 require('../helpers/initRedis')
+let cors = require("cors");
+app.use(cors());
 
 const app = express()
 app.use(morgan('dev'))
@@ -55,8 +57,24 @@ app.use((err, req, res, next) => {
     })
 })
 
-// connectDB().then(() => {
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
-// })
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect(process.env.MONGO_URI);
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
+  
+  //Routes go here
+  app.all('*', (req,res) => {
+      res.json({"every thing":"is awesome"})
+  })
+  
+  //Connect to the database before listening
+  connectDB().then(() => {
+      app.listen(PORT, () => {
+          console.log("listening for requests");
+      })
+  })
