@@ -1,0 +1,45 @@
+//file untuk test
+
+GET http://localhost:3000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTIwMjM5OTIsImV4cCI6MTY5MjAyNDA1MiwiYXVkIjoiNjRkOGY0NTQwOGUwMDcyNGE1Yjc3YzM1IiwiaXNzIjoid2Vic2l0ZWJ1aWxkZXIuY29tIn0.L90ZgGCVd-KFlxPDe1w9EDcwP6tOzIaTJGj5HA4lpvQ
+
+###login route
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "sammy@gmail.com",
+    "password": "123456Be",
+    "isAdmin": false
+}
+
+###register route
+
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "email": "sammy@gmail.com",
+    "password": "123456Be",
+    "repeat_password": "123456Be",
+    "isAdmin": false
+}
+
+###refresh-token route
+
+POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTIwMjQwMDksImV4cCI6MTcyMzU4MTYwOSwiYXVkIjoiNjRkOGY0NTQwOGUwMDcyNGE1Yjc3YzM1IiwiaXNzIjoid2Vic2l0ZWJ1aWxkZXIuY29tIn0.I16_cXJsxAuSpZ2Gf8wUTopxRmrQ5kM59YN5KjSMujw"
+}
+
+###logout route
+
+DELETE http://localhost:3000/auth/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTIzNjcwNjIsImV4cCI6MTcyMzkyNDY2MiwiYXVkIjoiNjRkZjc4YzkwYzNlOWU0MDRiMDg4NTVmIiwiaXNzIjoid2Vic2l0ZWJ1aWxkZXIuY29tIn0.5ICd2p25I9Uy43CmqSkpZBT2WAJcHm6jc2zJxpaRViw"
+}
