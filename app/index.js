@@ -10,19 +10,20 @@ const express = require('express')
 const morgan = require('morgan') 
 const createError = require('http-errors')
 const jwt = require('jsonwebtoken')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 require('dotenv').config()
 require('../helpers/initMongoDB')
 const authRoute = require('../routes/authRoute')
 const { verifyAccessToken } = require('../helpers/jwtHelper')
 require('../helpers/initRedis')
-let cors = require("cors");
-app.use(cors());
+const cors = require("cors");
+
 
 const app = express()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true})) //optional
+app.use(cors()); 
 
 // const connectDB = async () => {
 //     try {
@@ -56,6 +57,12 @@ app.use((err, req, res, next) => {
         },
     })
 })
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3001");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 const connectDB = async () => {
     try {
