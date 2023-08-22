@@ -20,7 +20,7 @@ const userSchema = new schema ({
     },
     isAdmin:{
         type: Boolean,
-        required: true
+        required: false
     }
 })
 
@@ -48,13 +48,13 @@ userSchema.methods.isValidPassword = async function (password){
     }
 }
 
-// userSchema.methods.isValidRole = async function (isAdmin){
-//     try {
-//         return await isAdmin === this.isAdmin
-//     } catch (error) {
-//         throw error
-//     }
-// }   
+userSchema.methods.isValidRole = async function (isAdmin){
+    try {
+        return await isAdmin === this.isAdmin
+    } catch (error) {
+        throw error
+    }
+}   
 
 
 const user = mongoose.model('user', userSchema)

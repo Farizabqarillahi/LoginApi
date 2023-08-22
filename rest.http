@@ -5,13 +5,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTIwMjM5O
 
 ###login route
 
-POST http://localhost:3000/auth/login
+POST http://localhost:3001/auth/login
 Content-Type: application/json
 
 {
-    "email": "sammy@gmail.com",
+    "email": "zahrandi@gmail.com",
     "password": "123456Be",
-    "isAdmin": false
+    "isAdmin": true
 }
 
 ###register route
