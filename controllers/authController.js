@@ -21,9 +21,9 @@ module.exports = {
             const user = new User(result)
             const savedUser = await user.save()
     
-            const accessToken = await signAccessToken(savedUser.id)
-            const refreshToken = await signRefreshToken(savedUser.id)
-            res.sendStatus(200).json({accessToken, refreshToken});
+            // const accessToken = await signAccessToken(savedUser.id)
+            // const refreshToken = await signRefreshToken(savedUser.id)
+            res.sendStatus(200).json({success:true});
         } catch(error){
             if(error.isJoi === true) error.status = 422
             next(error)
