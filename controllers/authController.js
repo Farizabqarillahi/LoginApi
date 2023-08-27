@@ -23,7 +23,7 @@ module.exports = {
     
             const accessToken = await signAccessToken(savedUser.id)
             const refreshToken = await signRefreshToken(savedUser.id)
-            res.send({accessToken, refreshToken})
+            res.sendStatus(200).json({accessToken, refreshToken});
         } catch(error){
             if(error.isJoi === true) error.status = 422
             next(error)
@@ -80,7 +80,7 @@ module.exports = {
                     throw createError.InternalServerError()
                 }
                 console.log(value)
-                res.sendStatus(204)
+                res.sendStatus(204).json({success: true});
                 // res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, accessToken, refreshToken });
             })
 
