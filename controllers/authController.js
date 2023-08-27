@@ -23,7 +23,7 @@ module.exports = {
     
             const accessToken = await signAccessToken(savedUser.id)
             const refreshToken = await signRefreshToken(savedUser.id)
-            res.send({accessToken, refreshToken})
+            res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, accessToken, refreshToken });
         } catch(error){
             if(error.isJoi === true) error.status = 422
             next(error)
@@ -34,7 +34,7 @@ module.exports = {
         try{
             const result = await authSchema.validateAsync(req.body)
             const user = await User.findOne({email: result.email})
-            const admin = await User.findOne({isAdmin: result.isAdmin})
+            // const admin = await User.findOne({isAdmin: result.isAdmin})
             const isMatch = await user.isValidPassword(result.password)
             // const isRole = await user.isValidRole(result.isAdmin)
             
@@ -46,7 +46,7 @@ module.exports = {
             const refreshToken = await signRefreshToken(user.id)
             // const adminStatus = result.isAdmin
 
-            res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, admin, accessToken, refreshToken });
+            res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, accessToken, refreshToken });
         }catch(error){
             if(error.isJoi === true){
                 return next(createError.BadRequest('Invalid Username/Password'))
@@ -81,7 +81,9 @@ module.exports = {
                 }
                 console.log(value)
                 res.sendStatus(204)
+                // res.status(200).json({ success: true, message:{id: "Berhasil", en:"Success"}, accessToken, refreshToken });
             })
+
         } catch (error) {
             next(error)
         }
